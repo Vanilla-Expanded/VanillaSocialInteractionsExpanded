@@ -1,16 +1,12 @@
 ﻿using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using Verse;
 using Verse.AI;
-using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
 {
+
 	public class IncidentWorker_OneNightStand : IncidentWorker
 	{
 		protected override bool CanFireNowSub(IncidentParms parms)
@@ -24,30 +20,26 @@ namespace VanillaSocialInteractionsExpanded
 				return false;
 			}
 			Map map = (Map)parms.target;
-			if (TryFindNewLovers(map, out var init, out var partner))
-            {
-				return true;
-            }
-			return false;
+			return TryFindNewLovers(map, out _, out _);
 		}
 		private bool TryFindNewLovers(Map map, out Pawn initiator, out Pawn partner)
-        {
-			var candidates = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(x => x.RaceProps.Humanlike);
-			var lovers = GetNewLoversFrom(candidates);
-			foreach (var pawn in lovers.InRandomOrder())
-            {
-				foreach (var otherPawn in lovers.InRandomOrder())
-                {
+		{
+			IEnumerable<Pawn> candidates = map.mapPawns.SpawnedPawnsInFaction(Faction.OfPlayer).Where(x => x.RaceProps.Humanlike);
+			IEnumerable<Pawn> lovers = GetNewLoversFrom(candidates);
+			foreach (Pawn pawn in lovers.InRandomOrder())
+			{
+				foreach (Pawn otherPawn in lovers.InRandomOrder())
+				{
 					if (pawn != otherPawn)
 					{
-						var bed1 = pawn.CurrentBed();
+						Building_Bed bed1 = pawn.CurrentBed();
 						if (bed1 != null && bed1.SleepingSlotsCount > 1)
-                        {
+						{
 							initiator = otherPawn;
 							partner = pawn;
 							return true;
-                        }
-						var bed2 = otherPawn.CurrentBed();
+						}
+						Building_Bed bed2 = otherPawn.CurrentBed();
 						if (bed2 != null && bed2.SleepingSlotsCount > 1)
 						{
 							initiator = pawn;
@@ -55,17 +47,22 @@ namespace VanillaSocialInteractionsExpanded
 							return true;
 						}
 					}
-                }
-            }
+				}
+			}
 			initiator = null;
 			partner = null;
 			return false;
 		}
 
 		private IEnumerable<Pawn> GetNewLoversFrom(IEnumerable<Pawn> candidates)
-        {
-			foreach (var pawn in candidates)
+		{
+			foreach (Pawn pawn in candidates)
 			{
+
+				if (pawn.DevelopmentalStage != DevelopmentalStage.Adult)
+				{
+					continue;
+				}
 				if (Find.TickManager.TicksGame < pawn.mindState.canLovinTick)
 				{
 					continue;
@@ -78,10 +75,10 @@ namespace VanillaSocialInteractionsExpanded
 				{
 					continue;
 				}
-				if (pawn.ageTracker.AgeBiologicalYearsFloat < 16)
-                {
+
+				{
 					continue;
-                }
+				}
 				yield return pawn;
 			}
 		}
@@ -94,7 +91,7 @@ namespace VanillaSocialInteractionsExpanded
 			Map map = (Map)parms.target;
 			if (TryFindNewLovers(map, out Pawn initiator, out Pawn partner))
 			{
-				var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_OneStandLovin, partner, partner.CurrentBed());
+				Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_OneStandLovin, partner, partner.CurrentBed());
 				initiator.jobs.TryTakeOrderedJob(job);
 				SendStandardLetter("VSIE.OneNightStandTitle".Translate(), "VSIE.OneNightStandText".Translate(initiator.Named("INITIATOR"), partner.Named("PARTNER"))
 					, LetterDefOf.PositiveEvent, parms, new List<Pawn> { initiator, partner });

@@ -232,6 +232,7 @@
     <beginLetterDef>PositiveEvent</beginLetterDef>
     <endMessage>{0} is no longer inspired (flirting frenzy).</endMessage>
     <baseInspectLine>Inspired: Flirting frenzy</baseInspectLine>
+	<workerClass>VanillaSocialInteractionsExpanded.InspirationWorker_FlirtingFrenzy</workerClass>
     <requiredCapacities>
       <li>Moving</li>
       <li>Talking</li>

@@ -1,12 +1,8 @@
 ﻿using HarmonyLib;
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Verse;
-using Verse.AI;
 
 namespace VanillaSocialInteractionsExpanded
 {
@@ -14,21 +10,23 @@ namespace VanillaSocialInteractionsExpanded
 	public class AddAttendedWeddingThoughts_Patch
 	{
 		private static void Postfix(LordJob_Joinable_MarriageCeremony __instance)
-        {
+		{
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
 				List<Pawn> attendedWedding = new List<Pawn>();
 				List<Pawn> ownedPawns = __instance.lord.ownedPawns;
-				for (int i = 0; i < ownedPawns.Count; i++)
+				for (int i = ownedPawns.Count - 1; i >= 0; i--)
 				{
-					if (__instance.firstPawn.Position.InHorDistOf(ownedPawns[i].Position, 18f) || __instance.secondPawn.Position.InHorDistOf(ownedPawns[i].Position, 18f))
+					if (__instance.firstPawn.Position.InHorDistOf(ownedPawns[i].Position, 18f)
+						|| __instance.secondPawn.Position.InHorDistOf(ownedPawns[i].Position, 18f))
 					{
 						attendedWedding.Add(ownedPawns[i]);
 					}
 				}
 
-				foreach (var pawn in attendedWedding)
+				for (int i = attendedWedding.Count - 1; i >= 0; i--)
 				{
+					Pawn pawn = attendedWedding[i];
 					if (pawn != __instance.firstPawn)
 					{
 						if (Rand.Chance(0.1f))
@@ -44,8 +42,11 @@ namespace VanillaSocialInteractionsExpanded
 						}
 					}
 				}
-				foreach (var pawn in __instance.lord.Map.mapPawns.AllPawns.Where(x => x.IsColonist))
+
+				List<Pawn> colonists = __instance.lord.Map.mapPawns.AllPawns.Where(x => x.IsColonist).ToList();
+				for (int i = colonists.Count - 1; i >= 0; i--)
 				{
+					Pawn pawn = colonists[i];
 					if (!attendedWedding.Contains(pawn))
 					{
 						if (attendedWedding.Contains(__instance.firstPawn))

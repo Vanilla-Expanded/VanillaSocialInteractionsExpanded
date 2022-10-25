@@ -1,36 +1,28 @@
 ﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using Verse;
-using Verse.AI;
-using Verse.AI.Group;
-using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
 {
 	public class GatheringWorker_Dating : GatheringWorker_DoublePawn
-    {
-        public override bool CanExecute(Map map, Pawn organizer = null)
-        {
+	{
+		public override bool CanExecute(Map map, Pawn organizer = null)
+		{
 			if (!VanillaSocialInteractionsExpandedSettings.EnableDating)
-            {
+			{
 				return false;
-            }
-            return base.CanExecute(map, organizer);
-        }
-        protected override bool MemberValidator(Pawn pawn)
+			}
+			return base.CanExecute(map, organizer);
+		}
+		protected override bool MemberValidator(Pawn pawn)
 		{
 			return !VSIE_Utils.workTags.Contains(pawn.mindState.lastJobTag);
 		}
 		protected override bool PawnsCanGatherTogether(Pawn organizer, Pawn companion)
 		{
-			return BasicLovePartnerRelationGenerationChance(organizer, companion) != 0f 
-				&& companion.relations.OpinionOf(organizer) >= 0 && organizer.relations.OpinionOf(companion) >= 0 
-				&& organizer.relations.CompatibilityWith(companion) >= 1f && companion.relations.CompatibilityWith(organizer) >= 1f 
+			return BasicLovePartnerRelationGenerationChance(organizer, companion) != 0f
+				&& organizer.DevelopmentalStage == DevelopmentalStage.Adult && companion.DevelopmentalStage == DevelopmentalStage.Adult
+				&& companion.relations.OpinionOf(organizer) >= 0 && organizer.relations.OpinionOf(companion) >= 0
+				&& organizer.relations.CompatibilityWith(companion) >= 1f && companion.relations.CompatibilityWith(organizer) >= 1f
 				&& (!organizer.GetSpouses(false).Contains(companion) || Rand.Chance(0.7f)); // we reduce the chance of married couples a bit
 		}
 

@@ -313,6 +313,7 @@
     <Compile Include="HarmonyPatches\ButcherProducts_Patch.cs" />
     <Compile Include="HarmonyPatches\WorkGiver_Patches.cs" />
     <Compile Include="Incidents\IncidentWorker_OneNightStand.cs" />
+    <Compile Include="Inspirations\InspirationWorker_FlirtingFrenzy.cs" />
     <Compile Include="Interactions\InteractionWorker_Discord.cs" />
     <Compile Include="Interactions\InteractionWorker_Vent.cs" />
     <Compile Include="Interactions\InteractionWorker_Teaching.cs" />
