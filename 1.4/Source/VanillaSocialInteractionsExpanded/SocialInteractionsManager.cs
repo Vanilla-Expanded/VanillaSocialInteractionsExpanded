@@ -224,6 +224,12 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_Collections.Look(ref raiderLords, "lords", LookMode.Reference);
             Scribe_References.Look(ref faction, "faction");
             Scribe_Values.Look(ref initTime, "initTime");
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                defenders?.RemoveWhere(x => x is null);
+                raiders?.RemoveWhere(x => x is null);
+                raiderLords?.RemoveWhere(x => x is null);
+            }
         }
     }
 
@@ -312,6 +318,9 @@ namespace VanillaSocialInteractionsExpanded
                 var raidGroup = this.raidGroups.Where(x => x.raiderLords?.Contains(lord) ?? false).FirstOrDefault();
                 if (raidGroup != null)
                 {
+                    raidGroup.defenders.RemoveWhere(x => x is null);
+                    raidGroup.raiders.RemoveWhere(x => x is null);
+
                     var remainedRaidersCount = raidGroup.raiders.Where(x => !x.Dead && !x.Downed).Count();
                     var remainedRaidersPercentFromTotal = (float)remainedRaidersCount / (float)raidGroup.raiders.Count();
 
