@@ -122,30 +122,33 @@ namespace VanillaSocialInteractionsExpanded
 	[HarmonyPatch(typeof(MentalStateHandler), "TryStartMentalState")]
 	public class TryStartMentalState_Patch
 	{
-		private static bool Prefix(MentalStateHandler __instance, Pawn ___pawn, bool __result, MentalStateDef stateDef, string reason = null, bool forceWake = false, bool causedByMood = false, Pawn otherPawn = null, bool transitionSilently = false)
+		private static bool Prefix(MentalStateHandler __instance, Pawn ___pawn, bool __result,
+			MentalStateDef stateDef, string reason = null, bool forceWake = false, bool causedByMood = false, Pawn otherPawn = null, bool transitionSilently = false, bool causedByDamage = false, bool causedByPsycast = false)
         {
-			if (VanillaSocialInteractionsExpandedSettings.EnableVenting)
+			if (causedByMood && !causedByPsycast && ___pawn.IsColonist)
 			{
-				if (causedByMood)
-				{
-					var friendsToVent = VSIE_Utils.GetFriendsFor(___pawn).Where(x => x.relations != null && x.Map == ___pawn.Map && x.Position.DistanceTo(___pawn.Position) <= 30);
-					if (friendsToVent.Any())
-					{
-						var friendToVent = friendsToVent.RandomElementByWeight(x => x.relations.OpinionOf(___pawn));
-						var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_VentToFriend, friendToVent);
-						if (___pawn.jobs?.TryTakeOrderedJob(job) ?? false)
-						{
-							__result = false;
-							return false;
-						}
-					}
-				}
-				if (VSIE_Utils.SocialInteractionsManager.postRaidPeriodTicks > Find.TickManager.TicksGame)
+                if (VSIE_Utils.SocialInteractionsManager.postRaidPeriodTicks > Find.TickManager.TicksGame)
                 {
-					__result = false;
-					return false;
-				}
-			}
+                    __result = false;
+                    return false;
+                }
+
+                if (VanillaSocialInteractionsExpandedSettings.EnableVenting)
+                {
+                    var friendsToVent = VSIE_Utils.GetFriendsFor(___pawn).Where(x => x.relations != null && x.Map == ___pawn.Map && x.Position.DistanceTo(___pawn.Position) <= 30);
+                    if (friendsToVent.Any())
+                    {
+                        var friendToVent = friendsToVent.RandomElementByWeight(x => x.relations.OpinionOf(___pawn));
+                        var job = JobMaker.MakeJob(VSIE_DefOf.VSIE_VentToFriend, friendToVent);
+                        if (___pawn.jobs?.TryTakeOrderedJob(job) ?? false)
+                        {
+                            __result = false;
+                            return false;
+                        }
+                    }
+                }
+            }
+
 			return true;
         }
 		private static void Postfix(MentalStateHandler __instance, Pawn ___pawn, bool __result, MentalStateDef stateDef, string reason = null, bool forceWake = false, bool causedByMood = false, Pawn otherPawn = null, bool transitionSilently = false)
