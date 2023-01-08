@@ -17,34 +17,37 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Postfix(Pawn __instance, Map map, bool respawningAfterLoad)
 		{
-			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
+			LongEventHandler.ExecuteWhenFinished(delegate
 			{
-				if (!respawningAfterLoad && __instance.ageTracker != null && __instance.relations != null)
+				if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 				{
-					var pawnAge = __instance.ageTracker.AgeChronologicalYearsFloat;
-					foreach (var relPawn in __instance.relations.PotentiallyRelatedPawns)
+					if (!respawningAfterLoad && __instance.ageTracker != null && __instance.relations != null)
 					{
-						if (relPawn?.ageTracker != null)
-                        {
-							var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
-							if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
+						var pawnAge = __instance.ageTracker.AgeChronologicalYearsFloat;
+						foreach (var relPawn in __instance.relations.PotentiallyRelatedPawns)
+						{
+							if (relPawn?.ageTracker != null)
 							{
-								if (Rand.ChanceSeeded(0.1f, __instance.thingIDNumber))
+								var relPawnAge = relPawn.ageTracker.AgeChronologicalYearsFloat;
+								if (__instance.relations.OpinionOf(relPawn) >= 30 && relPawn.relations.OpinionOf(__instance) >= 30 && new FloatRange(-5f, 5f).Includes(pawnAge - relPawnAge))
 								{
-									TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
-									TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+									if (Rand.ChanceSeeded(0.1f, __instance.thingIDNumber))
+									{
+										TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, __instance, relPawn);
+										TaleRecorder.RecordTale(VSIE_DefOf.VSIE_HasBeenMyFriendSinceChildhood, relPawn, __instance);
+									}
 								}
 							}
-						}
 
+						}
+					}
+
+					if (__instance.Faction == Faction.OfPlayer)
+					{
+						VSIE_Utils.TryRegisterNewColonist(__instance, __instance.Faction);
 					}
 				}
-
-				if (__instance.Faction == Faction.OfPlayer)
-				{
-					VSIE_Utils.TryRegisterNewColonist(__instance, __instance.Faction);
-				}
-			}
+			});
 		}
 	}
 
