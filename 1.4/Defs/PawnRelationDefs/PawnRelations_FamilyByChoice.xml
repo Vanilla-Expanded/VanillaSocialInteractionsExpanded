@@ -31,7 +31,7 @@
 			<li>
 				<label>best friend sold</label>
 				<labelSocial>sold my best friend</labelSocial>
-				<description>Someone I love was sold to a trader like a piece of meat!</description>
+				<description>A friend of mine was sold to a trader like a piece of meat!</description>
 				<baseOpinionOffset>-10</baseOpinionOffset>
 				<baseMoodEffect>-10</baseMoodEffect>
 			</li>
@@ -79,7 +79,7 @@
 		<stages>
 			<li>
 				<label>my best friend {0} died</label>
-				<description>My best friend died. Such a man... my future is gone.</description>
+				<description>My best friend died. How could this happen!</description>
 				<baseMoodEffect>-18</baseMoodEffect>
 			</li>
 		</stages>
@@ -90,7 +90,7 @@
 		<stages>
 			<li>
 				<label>my best friend {0} died</label>
-				<description>My best friend died. Such a woman... my future is gone.</description>
+				<description>My best friend died. How could this happen!</description>
 				<baseMoodEffect>-18</baseMoodEffect>
 			</li>
 		</stages>
