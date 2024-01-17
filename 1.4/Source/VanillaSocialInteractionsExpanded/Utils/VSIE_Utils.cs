@@ -212,7 +212,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			if (pawn != null && faction == Faction.OfPlayer && (pawn.RaceProps?.Humanlike ?? false) && !SocialInteractionsManager.joinedColonists.ContainsKey(pawn))
 			{
-				SocialInteractionsManager.joinedColonists[pawn] = Find.TickManager.TicksAbs;
+				SocialInteractionsManager.joinedColonists[pawn] = GenTicks.TicksAbs;
 			}
 		}
 
