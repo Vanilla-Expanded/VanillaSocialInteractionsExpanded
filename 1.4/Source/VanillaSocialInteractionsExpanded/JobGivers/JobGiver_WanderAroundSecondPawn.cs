@@ -48,16 +48,22 @@ namespace VanillaSocialInteractionsExpanded
 				pawn.mindState.nextMoveOrderIsWait = false;
 				return null;
 			}
-			Job job2 = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoWith, exactWanderDest, VSIE_Utils.GetCompanion(pawn));
-			job2.locomotionUrgency = locomotionUrgency;
-			job2.expiryInterval = expiryInterval;
-			job2.checkOverrideOnExpire = true;
-			return job2;
+			var companion = VSIE_Utils.GetCompanion(pawn);
+			if (companion != null)
+			{
+                Job job2 = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoWith, exactWanderDest, companion);
+                job2.locomotionUrgency = locomotionUrgency;
+                job2.expiryInterval = expiryInterval;
+                job2.checkOverrideOnExpire = true;
+                return job2;
+            }
+			return null;
 		}
+
 		protected override IntVec3 GetWanderRoot(Pawn pawn)
 		{
-			throw new NotImplementedException();
-		}
+			return pawn.Position;
+        }
 	}
 }
 
