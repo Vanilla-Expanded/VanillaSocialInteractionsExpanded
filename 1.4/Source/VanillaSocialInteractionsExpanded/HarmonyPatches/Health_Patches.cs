@@ -78,15 +78,20 @@ namespace VanillaSocialInteractionsExpanded
 	public static class ImmunityTick_Patch
 	{
 		public static Dictionary<Pawn, int> checkedPawns = new Dictionary<Pawn, int>();
-		private static void Postfix(ImmunityRecord __instance, Pawn pawn, bool sick, Hediff diseaseInstance)
+		private static void Prefix(ImmunityRecord __instance, out bool __state)
 		{
-			if (VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
+			__state = __instance.immunity < 1f;
+		}
+		private static void Postfix(ImmunityRecord __instance, Pawn pawn, bool __state)
+		{
+			if (__state && VanillaSocialInteractionsExpandedSettings.EnableObtainingNewTraits)
             {
-				if (__instance.hediffDef.lethalSeverity == 1f && __instance.immunity == 1f)
+				if (__instance.hediffDef.lethalSeverity == 1f && __instance.immunity >= 1f)
 				{
 					if (checkedPawns.TryGetValue(pawn, out int checkedTicks) && Find.TickManager.TicksGame < checkedTicks + 60000) return;
 					VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.RecoveredAfterDeadlyDisease", 0.1f);
 					checkedPawns[pawn] = Find.TickManager.TicksGame;
+					Log.Message("pawn: " + pawn);
 				}
 			}
 		}
