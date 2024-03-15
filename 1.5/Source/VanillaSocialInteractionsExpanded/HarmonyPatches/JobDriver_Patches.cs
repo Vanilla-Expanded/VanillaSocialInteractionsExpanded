@@ -179,7 +179,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn pawn, ref float extraJoyGainFactor)
 		{
-			if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy && pawn.CurJobDef == JobDefOf.SocialRelax)
+			if (pawn.InspirationDef == VSIE_DefOf.VSIE_Party_Frenzy && pawn.CurJobDef == VSIE_DefOf.SocialRelax)
             {
 				extraJoyGainFactor *= 2f;
 			}

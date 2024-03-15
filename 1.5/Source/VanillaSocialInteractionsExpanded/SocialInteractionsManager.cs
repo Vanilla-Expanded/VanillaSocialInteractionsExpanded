@@ -336,8 +336,8 @@ namespace VanillaSocialInteractionsExpanded
                             var traits = pawn.story?.traits;
                             if (traits != null)
                             {
-                                var nerves = traits.GetTrait(TraitDefOf.Nerves);
-                                var naturalMood = traits.GetTrait(TraitDefOf.NaturalMood);
+                                var nerves = traits.GetTrait(VSIE_DefOf.Nerves);
+                                var naturalMood = traits.GetTrait(VSIE_DefOf.NaturalMood);
                                 if (nerves != null && (nerves.Degree == 2 || nerves.Degree == 1) ||
                                     traits.HasTrait(TraitDefOf.Kind) ||
                                     naturalMood != null && (naturalMood.Degree == 2 || naturalMood.Degree == 1))

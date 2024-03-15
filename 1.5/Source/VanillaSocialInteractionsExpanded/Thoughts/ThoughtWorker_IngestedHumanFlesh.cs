@@ -20,7 +20,7 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				return false;
 			}
-			if (p.story.traits.HasTrait(TraitDefOf.Cannibal))
+			if (p.story.traits.HasTrait(VSIE_DefOf.Cannibal))
             {
 				return false;
             }

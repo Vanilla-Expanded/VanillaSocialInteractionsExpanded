@@ -106,6 +106,10 @@ namespace VanillaSocialInteractionsExpanded
 
         public static GatheringDef VSIE_ViewingArtTogether;
         public static JobDef VSIE_ViewArtTogether;
+        public static JobDef SocialRelax;
+        public static TraitDef Cannibal;
+        public static TraitDef NaturalMood;
+        public static TraitDef Nerves;
 
 
         public static GatheringDef VSIE_BuildingSnowmen;

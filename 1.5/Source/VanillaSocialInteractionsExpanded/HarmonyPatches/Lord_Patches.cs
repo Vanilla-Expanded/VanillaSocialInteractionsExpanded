@@ -6,9 +6,9 @@ using Verse;
 
 namespace VanillaSocialInteractionsExpanded
 {
-	[HarmonyPatch(typeof(LordJob_Joinable_MarriageCeremony), "AddAttendedWeddingThoughts")]
-	public class AddAttendedWeddingThoughts_Patch
-	{
+	[HarmonyPatch(typeof(LordJob_Joinable_MarriageCeremony), "WeddingSucceeded")]
+	public static class LordJob_Joinable_MarriageCeremony_WeddingSucceeded_Patch
+    {
 		private static void Postfix(LordJob_Joinable_MarriageCeremony __instance)
 		{
 			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)

@@ -102,25 +102,26 @@ namespace VanillaSocialInteractionsExpanded
         }
     }
 
-    [HarmonyPatch(typeof(Mineable), "TrySpawnYield")]
+    [HarmonyPatch(typeof(Mineable), "TrySpawnYield", new Type[] { typeof(Map), typeof(bool), typeof(Pawn) })]
     public static class MineableYield_Patch
     {
         private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
-            List<CodeInstruction> instructionList = instructions.ToList();
+            List<CodeInstruction> codes = instructions.ToList();
             bool firstPass = false;
-            for (int i = 0; i < instructionList.Count; i++)
+            var stackCountField = AccessTools.Field(typeof(Thing), nameof(Thing.stackCount));
+            for (int i = 0; i < codes.Count; i++)
             {
-                CodeInstruction instruction = instructionList[i];
-
-                if (instruction.opcode == OpCodes.Stloc_1 && !firstPass)
+                CodeInstruction instruction = codes[i];
+                yield return instruction;
+                if (instruction.opcode == OpCodes.Ldloc_1 && i < codes.Count - 1 && !firstPass 
+                    && codes[i + 1].opcode == OpCodes.Stfld && codes[i + 1].OperandIs(stackCountField))
                 {
                     firstPass = true;
-                    yield return new CodeInstruction(opcode: OpCodes.Ldarg_S, operand: 4);
+                    yield return new CodeInstruction(opcode: OpCodes.Ldarg_S, operand: 3);
                     yield return new CodeInstruction(opcode: OpCodes.Call, operand: AccessTools.Method(typeof(MineableYield_Patch), nameof(MineableYield_Patch.InspiredYieldRate)));
                 }
 
-                yield return instruction;
             }
         }
 

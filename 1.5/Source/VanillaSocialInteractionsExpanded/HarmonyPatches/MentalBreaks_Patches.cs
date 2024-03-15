@@ -52,12 +52,12 @@ namespace VanillaSocialInteractionsExpanded
 		}
 	}
 
-	[HarmonyPatch(typeof(MentalState_Slaughterer), "Notify_SlaughteredAnimal")]
-	public class Notify_SlaughteredAnimal_Patch
-	{
-		private static void Postfix(Pawn ___pawn)
+	[HarmonyPatch(typeof(MentalState_SlaughterThing), "Notify_SlaughteredTarget")]
+	public class MentalState_SlaughterThing_Notify_SlaughteredTarget_Patch
+    {
+		private static void Postfix(Pawn ___pawn, MentalState_SlaughterThing __instance)
 		{
-			if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
+			if (__instance is MentalState_Slaughterer && VanillaSocialInteractionsExpandedSettings.EnableMemories)
 			{
 				if (Rand.Chance(0.1f))
 				{

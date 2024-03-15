@@ -91,7 +91,6 @@ namespace VanillaSocialInteractionsExpanded
 					if (checkedPawns.TryGetValue(pawn, out int checkedTicks) && Find.TickManager.TicksGame < checkedTicks + 60000) return;
 					VSIE_Utils.TryDevelopNewTrait(pawn, "VSIE.RecoveredAfterDeadlyDisease", 0.1f);
 					checkedPawns[pawn] = Find.TickManager.TicksGame;
-					Log.Message("pawn: " + pawn);
 				}
 			}
 		}

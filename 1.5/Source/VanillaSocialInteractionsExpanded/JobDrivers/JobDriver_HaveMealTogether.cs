@@ -288,40 +288,10 @@ namespace VanillaSocialInteractionsExpanded
             };
         }
 
-        public override bool ModifyCarriedThingDrawPos(ref Vector3 drawPos, ref bool behind, ref bool flip)
+        public override bool ModifyCarriedThingDrawPos(ref Vector3 drawPos, ref bool flip)
         {
             IntVec3 cell = job.GetTarget(TargetIndex.B).Cell;
-            return ModifyCarriedThingDrawPosWorker(ref drawPos, ref behind, ref flip, cell, pawn);
-        }
-
-        public static bool ModifyCarriedThingDrawPosWorker(ref Vector3 drawPos, ref bool behind, ref bool flip, IntVec3 placeCell, Pawn pawn)
-        {
-            if (pawn.pather.Moving)
-            {
-                return false;
-            }
-            Thing carriedThing = pawn.carryTracker.CarriedThing;
-            if (carriedThing == null || !carriedThing.IngestibleNow)
-            {
-                return false;
-            }
-            if (placeCell.IsValid && placeCell.AdjacentToCardinal(pawn.Position) && placeCell.HasEatSurface(pawn.Map) && carriedThing.def.ingestible.ingestHoldUsesTable)
-            {
-                drawPos = new Vector3((float)placeCell.x + 0.5f, drawPos.y, (float)placeCell.z + 0.5f);
-                return true;
-            }
-            if (carriedThing.def.ingestible.ingestHoldOffsetStanding != null)
-            {
-                HoldOffset holdOffset = carriedThing.def.ingestible.ingestHoldOffsetStanding.Pick(pawn.Rotation);
-                if (holdOffset != null)
-                {
-                    drawPos += holdOffset.offset;
-                    behind = holdOffset.behind;
-                    flip = holdOffset.flip;
-                    return true;
-                }
-            }
-            return false;
+            return JobDriver_Ingest.ModifyCarriedThingDrawPosWorker(ref drawPos, ref flip, cell, pawn);
         }
     }
 }
