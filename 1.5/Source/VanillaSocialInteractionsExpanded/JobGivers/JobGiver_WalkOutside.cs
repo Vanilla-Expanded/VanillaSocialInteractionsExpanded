@@ -34,7 +34,7 @@ namespace VanillaSocialInteractionsExpanded
 				else if (RCellFinder.TryFindRandomSpotJustOutsideColony(pawn.Position, pawn.Map, pawn, out var result, (IntVec3 cell) => 
 					!cell.Roofed(pawn.Map) && pawn.Position.DistanceTo(cell) > 50 && pawn.Rotation.FacingCell.DistanceTo(cell) < pawn.Position.DistanceTo(cell)))
 				{
-					Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoWith, target, result);
+					Job job = JobMaker.MakeJob(VSIE_DefOf.VSIE_GotoWith, result, target);
 					job.expiryInterval = ticksRange.RandomInRange;
 					return job;
 				}
