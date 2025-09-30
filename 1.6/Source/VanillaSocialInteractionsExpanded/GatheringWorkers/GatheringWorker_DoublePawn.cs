@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +59,7 @@ namespace VanillaSocialInteractionsExpanded
             {
                 return false;
             }
-            if (!TryFindGatherSpot(organizer, out IntVec3 spot))
+            if (!TryFindGatherSpot(organizer, out IntVec3 spot) || spot.IsValid is false)
             {
                 return false;
             }
@@ -85,10 +85,11 @@ namespace VanillaSocialInteractionsExpanded
         }
         private Pawn FindOrganizerCustom(Map map, out Pawn companion)
         {
+            companion = null;
+            if (map is null) return null;
             var organizer = FindRandomGatheringOrganizer(Faction.OfPlayer, map, def, out companion);
             if (organizer is null)
             {
-                companion = null;
                 return null;
             }
             return organizer;

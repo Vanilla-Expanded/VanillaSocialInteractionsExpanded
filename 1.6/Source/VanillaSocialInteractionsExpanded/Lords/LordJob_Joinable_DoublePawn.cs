@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +11,10 @@ using Verse.Grammar;
 
 namespace VanillaSocialInteractionsExpanded
 {
-
+    [HotSwappable]
     public class LordJob_Joinable_DoublePawn : LordJob_Joinable_Gathering
     {
         public Pawn secondPawn;
-
         private int durationTicks;
         private int startTicks;
         public override bool AllowStartNewGatherings => false;
@@ -37,6 +36,16 @@ namespace VanillaSocialInteractionsExpanded
                 }
                 return true;
             }
+        }
+
+        public override bool ShouldBeCalledOff()
+        {
+            return ShouldFail() || base.ShouldBeCalledOff();
+        }
+
+        private bool ShouldFail()
+        {
+            return organizer == null || secondPawn == null || !organizer.Spawned || !secondPawn.Spawned || secondPawn.Dead || secondPawn.Downed || organizer.Dead || organizer.Downed;
         }
 
         public LordJob_Joinable_DoublePawn()
@@ -96,7 +105,11 @@ namespace VanillaSocialInteractionsExpanded
         public override void LordJobTick()
         {
             base.LordJobTick();
-            if (Find.TickManager.TicksGame > this.startTicks + this.durationTicks + 100 && this.lord.CurLordToil is LordToil_Party toil) // in order to end infinite dates
+            if (ShouldFail())
+            {
+                this.Map.lordManager.RemoveLord(this.lord);
+            }
+            else if (Find.TickManager.TicksGame > this.startTicks + this.durationTicks + 100 && this.lord.CurLordToil is LordToil_Party toil) // in order to end infinite dates
             {
                 ApplyOutcome(toil);
                 this.Map.lordManager.RemoveLord(this.lord);
@@ -169,5 +182,10 @@ namespace VanillaSocialInteractionsExpanded
             Scribe_Values.Look(ref durationTicks, "durationTicks", 0);
             Scribe_Values.Look(ref startTicks, "startTicks", 0);
         }
+    }
+
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
+    internal class HotSwappableAttribute : Attribute
+    {
     }
 }

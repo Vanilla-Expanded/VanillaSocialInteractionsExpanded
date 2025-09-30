@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +31,7 @@ namespace VanillaSocialInteractionsExpanded
 			{
 				maxTalkDuration = Rand.RangeInclusive(300, 400);
 			};
+			toil.FailOn(x => this.TargetA.Pawn is null || this.TargetA.Pawn.Spawned is false || this.TargetA.Pawn.pather is null);
 			toil.tickAction = delegate
 			{
 				talkDuration++;
