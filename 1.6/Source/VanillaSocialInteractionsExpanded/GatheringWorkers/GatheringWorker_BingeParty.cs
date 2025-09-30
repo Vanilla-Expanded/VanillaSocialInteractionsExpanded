@@ -9,12 +9,12 @@ namespace VanillaSocialInteractionsExpanded
 
 	public class GatheringWorker_BingeParty : GatheringWorker
 	{
-		protected override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
+		public override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
 		{
 			return new LordJob_Joinable_BingeParty(spot, organizer, VSIE_DefOf.VSIE_BingeParty);
 		}
 
-        protected override Pawn FindOrganizer(Map map)
+        public override Pawn FindOrganizer(Map map)
         {
 			Predicate<Pawn> v = (Pawn x) => x.RaceProps.Humanlike && x.needs?.food != null && !x.InBed() && !x.InMentalState && x.GetLord() == null && GatheringsUtility.ShouldPawnKeepGathering(x, def) && !x.Drafted 
 			&& (def.requiredTitleAny == null || def.requiredTitleAny.Count == 0 || (x.royalty != null 
@@ -56,7 +56,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			return true;
 		}
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
 		{
 
 			return RCellFinder.TryFindGatheringSpot(organizer, VSIE_DefOf.VSIE_BingeParty, ignoreRequiredColonistCount: false, out spot);

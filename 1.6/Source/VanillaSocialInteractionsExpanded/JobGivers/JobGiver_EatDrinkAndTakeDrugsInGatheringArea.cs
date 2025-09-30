@@ -9,7 +9,7 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class JobGiver_EatDrinkAndTakeDrugsInGatheringArea : ThinkNode_JobGiver
 	{
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
             try
             {

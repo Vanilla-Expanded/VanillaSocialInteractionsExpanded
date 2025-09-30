@@ -23,7 +23,7 @@ namespace VanillaSocialInteractionsExpanded
             }
             return result && base.ConditionsMeet(organizer);
         }
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
         {
             if (JobGiver_ViewingArtTogether.TryFindArtToView(organizer, out Thing thing))
             {

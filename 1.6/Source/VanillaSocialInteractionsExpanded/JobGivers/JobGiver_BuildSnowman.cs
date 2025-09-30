@@ -37,7 +37,7 @@ namespace VanillaSocialInteractionsExpanded
             }
             return true;
         }
-        protected override Job TryGiveJob(Pawn pawn)
+        public override Job TryGiveJob(Pawn pawn)
         {
             if (CanBuildSnowman(pawn, out IntVec3 c))
             {

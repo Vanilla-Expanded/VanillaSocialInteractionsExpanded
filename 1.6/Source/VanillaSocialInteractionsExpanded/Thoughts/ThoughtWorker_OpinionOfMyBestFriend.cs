@@ -12,7 +12,7 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class ThoughtWorker_OpinionOfMyBestFriend : ThoughtWorker
 	{
-		protected override ThoughtState CurrentStateInternal(Pawn p)
+		public override ThoughtState CurrentStateInternal(Pawn p)
 		{
 			DirectPawnRelation directPawnRelation = p.relations.DirectRelations.FirstOrDefault(x => x.def == VSIE_DefOf.VSIE_BestFriend);
 			if (directPawnRelation == null)

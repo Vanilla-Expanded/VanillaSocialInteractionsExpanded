@@ -55,7 +55,7 @@ namespace VanillaSocialInteractionsExpanded
             return true;
         }
 
-        protected override IEnumerable<Toil> MakeNewToils()
+        public override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOn(() => !IngestibleSource.Destroyed && !IngestibleSource.IngestibleNow);
             Toil chew = ChewIngestibleWithTalking(pawn, ChewDurationMultiplier, TargetIndex.A, TargetIndex.B)

@@ -53,7 +53,7 @@ namespace VanillaSocialInteractionsExpanded
             this.startTicks = Find.TickManager.TicksGame;
         }
 
-        protected override LordToil CreateGatheringToil(IntVec3 spot, Pawn organizer, GatheringDef gatheringDef)
+        public override LordToil CreateGatheringToil(IntVec3 spot, Pawn organizer, GatheringDef gatheringDef)
         {
             return new LordToil_Party(spot, gatheringDef);
         }

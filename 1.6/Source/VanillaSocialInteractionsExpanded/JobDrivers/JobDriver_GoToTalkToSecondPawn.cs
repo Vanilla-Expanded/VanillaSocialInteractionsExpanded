@@ -17,7 +17,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			return true;
 		}
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			yield return Toils_Goto.Goto(TargetIndex.A, PathEndMode.Touch);
 			yield return GetTalkingToil();

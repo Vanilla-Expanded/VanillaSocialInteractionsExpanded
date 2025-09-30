@@ -6,12 +6,12 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class GatheringWorker_BirthdayParty : GatheringWorker
 	{
-		protected override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
+        public override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
 		{
 			return new LordJob_Joinable_Party(spot, organizer, def);
 		}
 
-        protected override Pawn FindOrganizer(Map map)
+        public override Pawn FindOrganizer(Map map)
         {
 			if (!VanillaSocialInteractionsExpandedSettings.EnableGroupActivities)
 			{
@@ -27,7 +27,7 @@ namespace VanillaSocialInteractionsExpanded
             }
 			return null;
         }
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
 		{
 			return RCellFinder.TryFindGatheringSpot(organizer, def, ignoreRequiredColonistCount: false, out spot);
 		}

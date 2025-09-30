@@ -17,7 +17,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			return true;
 		}
-        protected override IEnumerable<Toil> MakeNewToils()
+        public override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedOrNull(TargetIndex.A);
             Toil toil = new Toil();

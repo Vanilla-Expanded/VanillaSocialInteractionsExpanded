@@ -28,7 +28,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			return base.PostProcessLabel(p, label);
 		}
-		protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn other)
+		public override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn other)
 		{
 			if (!other.RaceProps.Humanlike)
 			{

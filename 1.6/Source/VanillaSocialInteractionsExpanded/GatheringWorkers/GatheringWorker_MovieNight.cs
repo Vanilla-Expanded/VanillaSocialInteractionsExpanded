@@ -76,7 +76,7 @@ namespace VanillaSocialInteractionsExpanded
             }
             return true;
         }
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
         {
             spot = IntVec3.Invalid;
             return true;

@@ -13,11 +13,11 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			return base.CanExecute(map, organizer);
 		}
-		protected override bool MemberValidator(Pawn pawn)
+        protected override bool MemberValidator(Pawn pawn)
 		{
 			return !VSIE_Utils.workTags.Contains(pawn.mindState.lastJobTag);
 		}
-		protected override bool PawnsCanGatherTogether(Pawn organizer, Pawn companion)
+        protected override bool PawnsCanGatherTogether(Pawn organizer, Pawn companion)
 		{
 			return BasicLovePartnerRelationGenerationChance(organizer, companion) != 0f
 				&& organizer.DevelopmentalStage == DevelopmentalStage.Adult && companion.DevelopmentalStage == DevelopmentalStage.Adult
@@ -46,7 +46,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			return 1f;
 		}
-		protected override float SortCandidatesBy(Pawn organizer, Pawn candidate)
+        protected override float SortCandidatesBy(Pawn organizer, Pawn candidate)
 		{
 			return organizer.relations.OpinionOf(candidate);
 		}

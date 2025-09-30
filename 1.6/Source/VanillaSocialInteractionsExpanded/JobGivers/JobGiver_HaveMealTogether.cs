@@ -14,7 +14,7 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class JobGiver_HaveMealTogether : ThinkNode_JobGiver
     {
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			var lordJob = pawn.GetLord()?.LordJob as LordJob_Joinable_MealTogether;
 			if (lordJob?.mealsEated != null && lordJob.mealsEated.TryGetValue(pawn, out var value) && value >= 1)

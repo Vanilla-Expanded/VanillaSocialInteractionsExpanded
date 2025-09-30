@@ -26,7 +26,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 		}
 
-		protected override float BaseMoodOffset
+		public override float BaseMoodOffset
 		{
 			get
 			{

@@ -23,7 +23,7 @@ namespace VanillaSocialInteractionsExpanded
 			return true;
 		}
 
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			Toil toil = new Toil();
 			toil.initAction = delegate

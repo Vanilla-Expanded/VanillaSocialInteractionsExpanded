@@ -49,7 +49,7 @@ namespace VanillaSocialInteractionsExpanded
 			return false;
 		}
 
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			this.EndOnDespawnedOrNull(TargetIndex.A);
 			Toil watch;

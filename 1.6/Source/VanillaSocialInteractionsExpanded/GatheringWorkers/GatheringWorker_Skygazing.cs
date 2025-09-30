@@ -40,7 +40,7 @@ namespace VanillaSocialInteractionsExpanded
             }
             return num;
         }
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
         {
             if (RCellFinder.TryFindSkygazeCell(organizer.Position, organizer, out spot))
             {

@@ -32,7 +32,7 @@ namespace VanillaSocialInteractionsExpanded
 			JoyUtility.JoyTickCheckEnd(pawn, 1,JoyTickFullJoyAction.None, extraJoyGainFactor, (Building)ArtThing);
 		}
 
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			this.FailOnDestroyedNullOrForbidden(TargetIndex.A);
 			yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.Touch);

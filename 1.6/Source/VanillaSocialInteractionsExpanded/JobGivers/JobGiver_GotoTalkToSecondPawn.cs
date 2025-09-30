@@ -14,7 +14,7 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class JobGiver_GotoTalkToSecondPawn : ThinkNode_JobGiver
 	{
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			Pawn target = VSIE_Utils.GetCompanion(pawn);
 			if (target != null)

@@ -19,7 +19,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			return true;
 		}
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			yield return GetTalkingToil();
 		}

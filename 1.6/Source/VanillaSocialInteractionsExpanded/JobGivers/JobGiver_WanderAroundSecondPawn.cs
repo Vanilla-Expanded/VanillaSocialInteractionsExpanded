@@ -14,7 +14,7 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class JobGiver_WanderAroundSecondPawn : JobGiver_Wander
 	{
-		protected override IntVec3 GetExactWanderDest(Pawn pawn)
+		public override IntVec3 GetExactWanderDest(Pawn pawn)
 		{
 			Pawn secondPawn = VSIE_Utils.GetCompanion(pawn);
 			if (secondPawn != null && GatheringsUtility.InGatheringArea(secondPawn.Position, pawn.DutyLocation(), pawn.Map))
@@ -28,7 +28,7 @@ namespace VanillaSocialInteractionsExpanded
 			}
 			return result;
 		}
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			bool flag = pawn.CurJob != null && pawn.CurJob.def == JobDefOf.GotoWander;
 			bool nextMoveOrderIsWait = pawn.mindState.nextMoveOrderIsWait;
@@ -60,7 +60,7 @@ namespace VanillaSocialInteractionsExpanded
 			return null;
 		}
 
-		protected override IntVec3 GetWanderRoot(Pawn pawn)
+		public override IntVec3 GetWanderRoot(Pawn pawn)
 		{
 			return pawn.Position;
         }

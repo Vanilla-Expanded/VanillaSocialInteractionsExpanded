@@ -7,7 +7,7 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class GatheringWorker_Funeral : GatheringWorker
     {
-        protected override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
+        public override LordJob CreateLordJob(IntVec3 spot, Pawn organizer)
         {
             var deadPawn = FindPawnToHonor(organizer.Map, out var grave);
             return new LordJob_Joinable_Funeral(spot, organizer, grave, VSIE_DefOf.VSIE_Funeral);
@@ -33,7 +33,7 @@ namespace VanillaSocialInteractionsExpanded
             return true;
         }
 
-        protected override void SendLetter(IntVec3 spot, Pawn organizer)
+        public override void SendLetter(IntVec3 spot, Pawn organizer)
         {
             var pawnToHonor = FindPawnToHonor(organizer.Map, out var grave);
             Find.LetterStack.ReceiveLetter(def.letterTitle, def.letterText.Formatted(pawnToHonor.Named("DEADPAWN")), LetterDefOf.PositiveEvent, new TargetInfo(spot, organizer.Map));
@@ -52,7 +52,7 @@ namespace VanillaSocialInteractionsExpanded
             grave = null;
             return null;
         }
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
         {
             var deadPawn = FindPawnToHonor(organizer.Map, out var grave);
             if (grave != null)

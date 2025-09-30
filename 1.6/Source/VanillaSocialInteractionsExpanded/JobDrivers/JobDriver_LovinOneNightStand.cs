@@ -54,7 +54,7 @@ namespace VanillaSocialInteractionsExpanded
 			return JobInBedUtility.InBedOrRestSpotNow(pawn, job.GetTarget(BedInd));
 		}
 
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			this.FailOnDespawnedOrNull(BedInd);
 			this.FailOnDespawnedOrNull(PartnerInd);

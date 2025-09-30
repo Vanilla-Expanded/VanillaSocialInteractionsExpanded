@@ -13,7 +13,7 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class JobGiver_TakeABeer : ThinkNode_JobGiver
     {
-        protected override Job TryGiveJob(Pawn pawn)
+        public override Job TryGiveJob(Pawn pawn)
         {
             var alcohol = pawn.health.hediffSet.hediffs.FirstOrDefault(x => x is Hediff_Alcohol);
             if (alcohol != null && alcohol.Severity > 0.1f)

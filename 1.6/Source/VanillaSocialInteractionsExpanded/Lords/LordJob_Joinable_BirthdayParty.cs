@@ -38,7 +38,7 @@ namespace VanillaSocialInteractionsExpanded
 			return "LordReportAttendingParty".Translate();
 		}
 
-		protected override LordToil CreateGatheringToil(IntVec3 spot, Pawn organizer, GatheringDef gatheringDef)
+		public override LordToil CreateGatheringToil(IntVec3 spot, Pawn organizer, GatheringDef gatheringDef)
 		{
 			return new LordToil_Party(spot, gatheringDef);
 		}
@@ -72,7 +72,7 @@ namespace VanillaSocialInteractionsExpanded
 			return stateGraph;
 		}
 
-		protected override Trigger_TicksPassed GetTimeoutTrigger()
+		public override Trigger_TicksPassed GetTimeoutTrigger()
 		{
 			return new Trigger_TicksPassed(durationTicks);
 		}

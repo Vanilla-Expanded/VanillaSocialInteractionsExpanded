@@ -22,7 +22,7 @@ namespace VanillaSocialInteractionsExpanded
         {
             return JobGiver_BuildSnowman.CanBuildSnowman(organizer, out var cell) && base.ConditionsMeet(organizer);
         }
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
         {
             if (JobGiver_BuildSnowman.CanBuildSnowman(organizer, out var cell))
             {

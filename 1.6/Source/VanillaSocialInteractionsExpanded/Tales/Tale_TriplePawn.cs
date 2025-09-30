@@ -99,7 +99,7 @@ namespace VanillaSocialInteractionsExpanded
 			Scribe_Deep.Look(ref thirdPawnData, "thirdPawnData");
 
 		}
-		protected override IEnumerable<Rule> SpecialTextGenerationRules(Dictionary<string, string> outConstants = null)
+		public override IEnumerable<Rule> SpecialTextGenerationRules(Dictionary<string, string> outConstants = null)
 		{
 			if (def.firstPawnSymbol.NullOrEmpty() || def.secondPawnSymbol.NullOrEmpty())
 			{

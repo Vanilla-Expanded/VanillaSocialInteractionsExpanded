@@ -22,7 +22,7 @@ namespace VanillaSocialInteractionsExpanded
 			return obj;
 		}
 
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			Pawn target = VSIE_Utils.GetCompanion(pawn);
 			if (target != null)

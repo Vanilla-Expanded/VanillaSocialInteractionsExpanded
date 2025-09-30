@@ -10,7 +10,7 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class ThoughtWorker_SocialEnvironment : ThoughtWorker
 	{
-		protected override ThoughtState CurrentStateInternal(Pawn p)
+		public override ThoughtState CurrentStateInternal(Pawn p)
 		{
 			if (p.Faction != null && p.Faction != Faction.OfPlayer)
             {

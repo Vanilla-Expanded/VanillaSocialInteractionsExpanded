@@ -22,11 +22,7 @@ namespace VanillaSocialInteractionsExpanded
         {
 
         }
-        protected override void ApplyOutcome(LordToil_Party toil)
-        {
-            base.ApplyOutcome(toil);
 
-        }
         public override void ExposeData()
         {
             base.ExposeData();

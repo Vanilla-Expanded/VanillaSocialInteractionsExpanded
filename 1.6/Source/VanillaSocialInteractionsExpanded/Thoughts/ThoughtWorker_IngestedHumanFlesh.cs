@@ -10,7 +10,7 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class ThoughtWorker_IngestedHumanFlesh : ThoughtWorker
 	{
-		protected override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn other)
+		public override ThoughtState CurrentSocialStateInternal(Pawn p, Pawn other)
 		{
 			if (!other.RaceProps.Humanlike)
 			{

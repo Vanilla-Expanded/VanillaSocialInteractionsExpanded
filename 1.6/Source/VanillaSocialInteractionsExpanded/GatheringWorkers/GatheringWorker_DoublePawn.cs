@@ -144,12 +144,12 @@ namespace VanillaSocialInteractionsExpanded
         {
             return true;
         }
-        protected override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
+        public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
         {
             return RCellFinder.TryFindGatheringSpot(organizer, def, ignoreRequiredColonistCount: false, out spot);
         }
 
-        protected override LordJob CreateLordJob(IntVec3 spot, Pawn organizer) // we don't use it, CreateLordJobCustom is used instead with custom arguments;
+        public override LordJob CreateLordJob(IntVec3 spot, Pawn organizer) // we don't use it, CreateLordJobCustom is used instead with custom arguments;
         {
             throw new NotImplementedException();
         }

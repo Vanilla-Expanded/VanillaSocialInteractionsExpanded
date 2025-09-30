@@ -14,7 +14,7 @@ namespace VanillaSocialInteractionsExpanded
 {
 	public class JobGiver_HonorPawn : ThinkNode_JobGiver
 	{
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			var graves = pawn.DutyLocation().GetThingList(pawn.Map).Where(x => x is Building_Grave);
 			if (graves.Any())

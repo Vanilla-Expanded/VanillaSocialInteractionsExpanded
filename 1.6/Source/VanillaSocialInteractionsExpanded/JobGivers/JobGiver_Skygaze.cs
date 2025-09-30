@@ -13,7 +13,7 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class JobGiver_Skygaze : ThinkNode_JobGiver
     {
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			if (!JoyUtility.EnjoyableOutsideNow(pawn) || pawn.Map.weatherManager.curWeather.rainRate > 0.1f)
 			{

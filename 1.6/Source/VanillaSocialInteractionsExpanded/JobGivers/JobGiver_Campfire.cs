@@ -13,7 +13,7 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class JobGiver_BuildCampfire : ThinkNode_JobGiver
     {
-        protected override Job TryGiveJob(Pawn pawn)
+        public override Job TryGiveJob(Pawn pawn)
         {
             if (pawn.WorkTypeIsDisabled(WorkTypeDefOf.Construction))
             {

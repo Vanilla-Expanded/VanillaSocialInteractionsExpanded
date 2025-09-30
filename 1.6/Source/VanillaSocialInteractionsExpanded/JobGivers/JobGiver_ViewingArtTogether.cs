@@ -14,7 +14,7 @@ namespace VanillaSocialInteractionsExpanded
     public class JobGiver_ViewingArtTogether : ThinkNode_JobGiver
     {
 		private static List<Thing> candidates = new List<Thing>();
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			var companion = VSIE_Utils.GetCompanion(pawn);
 			if (companion.CurJobDef == VSIE_DefOf.VSIE_ViewArtTogether)

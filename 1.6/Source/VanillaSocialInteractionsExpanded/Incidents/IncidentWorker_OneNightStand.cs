@@ -9,7 +9,7 @@ namespace VanillaSocialInteractionsExpanded
 
 	public class IncidentWorker_OneNightStand : IncidentWorker
 	{
-		protected override bool CanFireNowSub(IncidentParms parms)
+		public override bool CanFireNowSub(IncidentParms parms)
 		{
 			if (!VanillaSocialInteractionsExpandedSettings.EnableOneNightStand)
 			{
@@ -82,7 +82,7 @@ namespace VanillaSocialInteractionsExpanded
 				yield return pawn;
 			}
 		}
-		protected override bool TryExecuteWorker(IncidentParms parms)
+		public override bool TryExecuteWorker(IncidentParms parms)
 		{
 			if (!VanillaSocialInteractionsExpandedSettings.EnableOneNightStand)
 			{

@@ -18,7 +18,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			return true;
 		}
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			this.FailOn(() => Venter.CurJobDef != VSIE_DefOf.VSIE_VentToFriend);
 			Toil toil = new Toil();
@@ -47,7 +47,7 @@ namespace VanillaSocialInteractionsExpanded
 			return true;
 		}
 
-		protected override IEnumerable<Toil> MakeNewToils()
+		public override IEnumerable<Toil> MakeNewToils()
 		{
 			this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
 			this.FailOn(() => !Friend.Awake());

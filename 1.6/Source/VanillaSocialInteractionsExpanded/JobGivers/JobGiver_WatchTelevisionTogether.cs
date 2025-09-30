@@ -13,7 +13,7 @@ namespace VanillaSocialInteractionsExpanded
 {
     public class JobGiver_WatchTelevisionTogether : ThinkNode_JobGiver
     {
-		protected override Job TryGiveJob(Pawn pawn)
+		public override Job TryGiveJob(Pawn pawn)
 		{
 			var companion = VSIE_Utils.GetCompanion(pawn);
 			if (companion.CurJobDef == VSIE_DefOf.VSIE_WatchTelevisionTogether)
