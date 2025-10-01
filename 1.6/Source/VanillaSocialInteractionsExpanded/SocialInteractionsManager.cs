@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -198,7 +198,7 @@ namespace VanillaSocialInteractionsExpanded
         }
         public void ExposeData()
         {
-            Scribe_Collections.Look(ref workersWithWorkingTicks, "workersWithWorkingTicks", LookMode.Reference, LookMode.Deep, ref pawnsKeys, ref intValues);
+            Scribe_Collections.Look(ref workersWithWorkingTicks, "workersWithWorkingTicks", LookMode.Reference, LookMode.Deep, ref pawnsKeys, ref intValues, logNullErrors: false);
         }
         private List<Pawn> pawnsKeys;
         private List<WorkTime> intValues;
@@ -219,8 +219,8 @@ namespace VanillaSocialInteractionsExpanded
         }
         public void ExposeData()
         {
-            Scribe_Collections.Look(ref defenders, saveDestroyedThings: true, "defenders", LookMode.Reference);
-            Scribe_Collections.Look(ref raiders, saveDestroyedThings: true, "raiders", LookMode.Reference);
+            Scribe_Collections.Look(ref defenders, "defenders", LookMode.Reference);
+            Scribe_Collections.Look(ref raiders, "raiders", LookMode.Reference);
             Scribe_Collections.Look(ref raiderLords, "lords", LookMode.Reference);
             Scribe_References.Look(ref faction, "faction");
             Scribe_Values.Look(ref initTime, "initTime");
@@ -546,13 +546,13 @@ namespace VanillaSocialInteractionsExpanded
         {
             base.ExposeData();
             RemoveNullOrDestroyedPawns();
-            Scribe_Collections.Look(ref activeAspirations, "activeAspirations", LookMode.Reference, LookMode.Deep, ref pawnKeys, ref aspirationValues);
+            Scribe_Collections.Look(ref activeAspirations, "activeAspirations", LookMode.Reference, LookMode.Deep, ref pawnKeys, ref aspirationValues, logNullErrors: false);
             Scribe_Collections.Look(ref pawnsWithAdditionalTrait, "pawnsWithAdditionalTrait", LookMode.Reference);
-            Scribe_Collections.Look(ref teachersWithPupils, "teachersWithPupils", LookMode.Reference, LookMode.Deep, ref pawnKeys2, ref teachingValues);
-            Scribe_Collections.Look(ref pawnsWithWorkers, "pawnsWithWorkers", LookMode.Reference, LookMode.Deep, ref pawnKeys3, ref workerValues);
-            Scribe_Collections.Look(ref angryWorkers, "angryWorkers", LookMode.Reference, LookMode.Value, ref pawnKeys4, ref intValues);
-            Scribe_Collections.Look(ref birthdays, "birthdays", LookMode.Reference, LookMode.Value, ref pawnKeys5, ref intValues2);
-            Scribe_Collections.Look(ref joinedColonists, "joinedColonists", LookMode.Reference, LookMode.Value, ref pawnKeys6, ref intValues3);
+            Scribe_Collections.Look(ref teachersWithPupils, "teachersWithPupils", LookMode.Reference, LookMode.Deep, ref pawnKeys2, ref teachingValues, logNullErrors: false);
+            Scribe_Collections.Look(ref pawnsWithWorkers, "pawnsWithWorkers", LookMode.Reference, LookMode.Deep, ref pawnKeys3, ref workerValues, logNullErrors: false);
+            Scribe_Collections.Look(ref angryWorkers, "angryWorkers", LookMode.Reference, LookMode.Value, ref pawnKeys4, ref intValues, logNullErrors: false);
+            Scribe_Collections.Look(ref birthdays, "birthdays", LookMode.Reference, LookMode.Value, ref pawnKeys5, ref intValues2, logNullErrors: false);
+            Scribe_Collections.Look(ref joinedColonists, "joinedColonists", LookMode.Reference, LookMode.Value, ref pawnKeys6, ref intValues3, logNullErrors: false);
             Scribe_Collections.Look(ref raidGroups, "raidGroups", LookMode.Deep);
             Scribe_Collections.Look(ref honoredDeadPawns, "honoredDeadPawns", LookMode.Reference);
             Scribe_Values.Look(ref postRaidPeriodTicks, "postRaidPeriodTicks");

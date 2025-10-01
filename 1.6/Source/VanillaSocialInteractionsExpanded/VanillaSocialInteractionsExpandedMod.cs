@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace VanillaSocialInteractionsExpanded
         public VanillaSocialInteractionsExpandedMod(ModContentPack pack) : base(pack)
         {
             settings = GetSettings<VanillaSocialInteractionsExpandedSettings>();
-            ApplySettings();
+            LongEventHandler.ExecuteWhenFinished(ApplySettings);
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
@@ -39,7 +39,7 @@ namespace VanillaSocialInteractionsExpanded
         {
             if (!VanillaSocialInteractionsExpandedSettings.EnableInspirations)
             {
-                var inspirationDefs = DefDatabase<InspirationDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("VSIE_"));
+                var inspirationDefs = DefDatabase<InspirationDef>.AllDefsListForReading.Where(x => x.defName.StartsWith("VSIE_")).ToList();
                 foreach (var def in inspirationDefs)
                 {
                     DefDatabase<InspirationDef>.AllDefsListForReading.Remove(def);

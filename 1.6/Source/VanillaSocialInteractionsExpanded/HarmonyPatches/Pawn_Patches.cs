@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -128,7 +128,7 @@ namespace VanillaSocialInteractionsExpanded
 	{
 		private static void Prefix(Pawn __instance, DamageInfo? dinfo, Hediff exactCulprit = null)
 		{
-			if (__instance == CheckSurgeryFail_Patch._patient && CheckSurgeryFail_Patch._surgeon.IsColonist && __instance.IsColonist)
+			if (__instance == CheckSurgeryFail_Patch._patient && CheckSurgeryFail_Patch._surgeon != null && CheckSurgeryFail_Patch._surgeon.IsColonist && __instance.IsColonist)
 			{
 				if (VanillaSocialInteractionsExpandedSettings.EnableMemories)
 				{

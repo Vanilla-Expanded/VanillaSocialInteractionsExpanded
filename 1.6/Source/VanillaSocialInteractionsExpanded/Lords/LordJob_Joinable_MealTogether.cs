@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace VanillaSocialInteractionsExpanded
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Collections.Look(ref mealsEated, "mealsEated", LookMode.Reference, LookMode.Value, ref pawnKeys, ref intValues);
+            Scribe_Collections.Look(ref mealsEated, "mealsEated", LookMode.Reference, LookMode.Value, ref pawnKeys, ref intValues, logNullErrors: false);
             if (Scribe.mode == LoadSaveMode.PostLoadInit && gatheringDef == null)
             {
                 gatheringDef = VSIE_DefOf.VSIE_MealTogether;

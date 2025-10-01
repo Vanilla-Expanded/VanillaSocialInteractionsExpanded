@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace VanillaSocialInteractionsExpanded
         {
             if (FoodUtility.TryFindBestFoodSourceFor(organizer, organizer, false, out Thing foodSource, out ThingDef foodDef, 
                 canRefillDispenser: false, canUseInventory: true, canUsePackAnimalInventory: false,
-                allowForbidden: false, false, allowSociallyImproper: false, organizer.IsWildMan(), false, false, minPrefOverride: FoodPreferability.MealSimple))
+                allowForbidden: false, false, allowSociallyImproper: false, organizer.IsWildMan(), false, false, minPrefOverride: FoodPreferability.MealSimple) && foodSource != null && foodSource.Spawned)
             {
                 var firstChair = GetChairFor(organizer, foodSource);
                 if (firstChair != null && FoodUtility.TryFindBestFoodSourceFor(companion, companion, false, out Thing foodSource2, 
@@ -42,8 +42,7 @@ namespace VanillaSocialInteractionsExpanded
 
         public static Thing GetChairFor(Pawn pawn, Thing food, Thing firstChair = null)
         {
-            Thing thing = GenClosest.ClosestThingReachable(food.Position, pawn.Map, ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial), PathEndMode.OnCell, TraverseParms.For(pawn),
-                food.def.ingestible.chairSearchRadius, (Thing t) => IsProperChair(t, pawn) && (firstChair is null || firstChair != t && firstChair.Position.DistanceTo(t.Position) <= 3f) && t.Position.GetDangerFor(pawn, t.Map) == Danger.None);
+            Thing thing = GenClosest.ClosestThingReachable(food.Position, pawn.Map, ThingRequest.ForGroup(ThingRequestGroup.BuildingArtificial), PathEndMode.OnCell, TraverseParms.For(pawn), food.def.ingestible.chairSearchRadius, (Thing t) => IsProperChair(t, pawn) && (firstChair is null || firstChair != t && firstChair.Position.DistanceTo(t.Position) <= 3f) && t.Position.GetDangerFor(pawn, t.Map) == Danger.None);
             if (thing == null)
             {
                 var intVec = RCellFinder.SpotToChewStandingNear(pawn, food);
@@ -98,7 +97,7 @@ namespace VanillaSocialInteractionsExpanded
         }
         public override bool TryFindGatherSpot(Pawn organizer, out IntVec3 spot)
         {
-            spot = IntVec3.Invalid;
+            spot = organizer.Position;
             return true;
         }
 

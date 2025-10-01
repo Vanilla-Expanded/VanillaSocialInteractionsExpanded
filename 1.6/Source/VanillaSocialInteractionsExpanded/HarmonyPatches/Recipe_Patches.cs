@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -70,7 +70,7 @@ namespace VanillaSocialInteractionsExpanded
 		{
 			_patient = patient;
 			_surgeon = surgeon;
-			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations)
+			if (VanillaSocialInteractionsExpandedSettings.EnableAspirations && surgeon != null)
 			{
 				if (surgeon.InspirationDef == VSIE_DefOf.Inspired_Surgery)
 				{

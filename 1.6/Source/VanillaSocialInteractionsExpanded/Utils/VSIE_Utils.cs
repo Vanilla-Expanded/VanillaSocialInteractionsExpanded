@@ -1,4 +1,4 @@
-﻿using LudeonTK;
+using LudeonTK;
 using RimWorld;
 using System;
 using System.Collections.Generic;
@@ -87,8 +87,12 @@ namespace VanillaSocialInteractionsExpanded
 			var pawns = PawnsFinder.AllMaps_SpawnedPawnsInFaction(pawn.Faction).ToHashSet();
 			if (pawn.relations != null)
             {
-				pawns.AddRange(pawn.relations.PotentiallyRelatedPawns);
-            }
+				try
+				{
+					pawns.AddRange(pawn.relations.PotentiallyRelatedPawns);
+				}
+				catch { }
+			}
 			foreach (var otherPawn in pawns)
 			{
 				if (otherPawn.relations != null)
