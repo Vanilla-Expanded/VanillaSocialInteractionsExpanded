@@ -29,9 +29,9 @@ namespace VanillaSocialInteractionsExpanded
 
 		public bool IsRoyalty(Pawn pawn, Pawn other)
         {
-			var pawnTitle = pawn.royalty.MostSeniorTitle;
-			var otherTitle = other.royalty.MostSeniorTitle;
-			if (otherTitle != null)
+			var pawnTitle = pawn?.royalty?.MostSeniorTitle;
+			var otherTitle = other?.royalty?.MostSeniorTitle;
+			if (otherTitle is not null)
             {
 				if (pawnTitle is null || otherTitle.def.seniority > pawnTitle.def.seniority)
 				{
